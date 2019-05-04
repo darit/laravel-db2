@@ -59,7 +59,7 @@ class DB2Grammar extends Grammar
      */
     public function compileTableExists()
     {
-        return 'select * from information_schema.tables where table_schema = upper(?) and table_name = upper(?)';
+        return 'select * from SYSIBM.tables where table_schema = upper(?) and table_name = upper(?)';
     }
 
     /**
@@ -69,7 +69,7 @@ class DB2Grammar extends Grammar
      */
     public function compileColumnExists()
     {
-        return 'select column_name from information_schema.columns where table_schema = upper(?) and table_name = upper(?)';
+        return 'select column_name from SYSIBM.columns where table_schema = upper(?) and table_name = upper(?)';
     }
 
     /**

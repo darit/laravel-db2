@@ -32,7 +32,7 @@ class DB2Processor extends Processor
             $sequenceStr = $grammar->columnize($sequence);
         }
 
-        $sqlStr = 'select %s from new table (%s)';
+        $sqlStr = 'select %s from final table (%s)';
 
         $finalSql = sprintf($sqlStr, $sequenceStr, $sql);
         $results = $query->getConnection()

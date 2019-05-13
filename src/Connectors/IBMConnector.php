@@ -16,7 +16,11 @@ class IBMConnector extends DB2Connector
      */
     protected function getDsn(array $config)
     {
-        $dsn = "ibm:DRIVER={$config['driverName']};DATABASE={$config['database']};HOSTNAME={$config['host']};PORT={$config['port']};PROTOCOL=TCPIP;";
+        $sslSecurity = '';
+        if (env('DB_SSL', true)) {
+            $sslSecurity = 'SECURITY=SSL;';
+        }
+        $dsn = "ibm:DRIVER={$config['driverName']};DATABASE={$config['database']};HOSTNAME={$config['host']};PORT={$config['port']};PROTOCOL=TCPIP;" . $sslSecurity;
 
         return $dsn;
     }

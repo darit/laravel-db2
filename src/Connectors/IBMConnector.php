@@ -18,7 +18,7 @@ class IBMConnector extends DB2Connector
     {
         $sslSecurity = '';
         if (env('DB_SSL', true)) {
-            $sslSecurity = 'SECURITY=SSL;';
+            $sslSecurity = 'SECURITY=SSL;SSLClientKeystoredb=db2_ssl_cli_keydb.kdb;SSLClientKeystash=db2_ssl_cli_keydb.sth;';
         }
         $dsn = "ibm:DRIVER={$config['driverName']};DATABASE={$config['database']};HOSTNAME={$config['host']};PORT={$config['port']};PROTOCOL=TCPIP;" . $sslSecurity;
 

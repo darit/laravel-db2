@@ -1,17 +1,17 @@
 <?php
 
-namespace Cooperl\Database\DB2\Query\Processors;
+namespace Cooperl\DB2\Database\Query\Processors;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Processors\Processor;
-use Cooperl\Database\DB2\Query\Grammars\DB2Grammar;
+use Cooperl\DB2\Database\Query\Grammars\DB2Grammar;
 
 /**
- * Class DB2ZOSProcessor
+ * Class DB2Processor
  *
- * @package Cooperl\Database\DB2\Query\Processors
+ * @package Cooperl\DB2\Database\Query\Processors
  */
-class DB2ZOSProcessor extends Processor
+class DB2Processor extends Processor
 {
     /**
      * Process an "insert get ID" query.
@@ -42,7 +42,11 @@ class DB2ZOSProcessor extends Processor
             return array_values((array) $results[0]);
         } else {
             $result = (array) $results[0];
-            $id = $result[strtolower($sequenceStr)];
+            if (isset($result[$sequenceStr])) {
+                $id = $result[$sequenceStr];
+            } else {
+                $id = $result[strtoupper($sequenceStr)];
+            }
 
             return is_numeric($id) ? (int) $id : $id;
         }
